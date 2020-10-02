@@ -1,0 +1,11 @@
+# omogciti URL rewrite
+RewriteEngine On
+
+#preskoci ukoliko datoteka postoji
+RewriteCond %{REQUEST_FILENAME} !-f
+
+#prpreskoci ukoliko datoteka postojies
+RewriteCond %{REQUEST_FILENAME} !-d
+
+#single entry point
+RewriteRule (.*) index.php [L,E=PATH_INFO:/$1]

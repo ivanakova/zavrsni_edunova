@@ -1,0 +1,32 @@
+
+<!doctype html>
+<html lang="en">
+<div class="container center_div">
+<div class="div-wrapper d-flex justify-content-center align-items-center">    
+    <div class="col-md-4 col-md-offset-6 text-center">
+    <form action="<?=APP::config('url') ?>index/autorizacija" method="POST">
+    
+      <h1 class="h3 mb-3 font-weight-normal">Prijava</h1>
+
+      <div class="form-group">
+        <label for="inputEmail">Email:
+            <input type="email" name="email" class="form-control text-center" placeholder="ivan@primjer.hr" value="<?php $email; ?>">
+        </label>
+      <br>
+      </div>
+      <div class="form-group">
+        <label for="inputPassword">Lozinka:
+            <input type="password" name="lozinka" class="form-control text-center" placeholder="Lozinka">
+        </label>
+      <br>
+      </div>
+      <button class="btn btn-primary" type="submit">Prijava</button>
+      <br>
+      <?=$poruka; ?>
+      </form>
+      </div>
+    
+    </div>
+    </div>
+    
+
