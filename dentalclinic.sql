@@ -81,3 +81,8 @@ insert into ordinacija (naziv) values
 ('Ordinacija dentalne medicine Sandra'),
 ('Ordinacija dentalne medicine Josip'),
 ('Ordinacija dentalne medicine Damir');
+
+insert into pacijent (ime, prezime, mbo) values
+('Ivo', 'Ivić', '6852347620'),
+('Pero', 'Perić', '134567891'),
+('Ivana', 'Kovačević','9874561232');
