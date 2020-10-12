@@ -1,1 +1,20 @@
-Doktor
+<?php if($_SESSION['autoriziran']->uloga==='doktor'): ?>
+<a class="btn btn-outline-secondary" href="#">Dodaj novog doktora</a>
+<?php endif; ?>
+
+<table class="table table-borderless">
+  <thead>
+    <tr>
+      <th scope="col">Popis doktora</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach($doktori as $doktor): ?>
+        <tr>
+            <td><?=$doktor->ime?></td>
+            <td><?=$doktor->prezime?></td>
+            <td><?=$doktor->ordinacija?></td>
+        </tr>
+    <?php endforeach; ?>
+  </tbody>
+</table>

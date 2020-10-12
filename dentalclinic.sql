@@ -43,8 +43,7 @@ sifra int not null primary key auto_increment,
 ime varchar(30),
 prezime varchar(30),
 iban char(32),
-pregled datetime,
-ordinacija int not null
+pregled datetime
 );
 
 create table tehnicar(
@@ -86,3 +85,8 @@ insert into pacijent (ime, prezime, mbo) values
 ('Ivo', 'Ivić', '6852347620'),
 ('Pero', 'Perić', '134567891'),
 ('Ivana', 'Kovačević','9874561232');
+
+insert into doktor (ime, prezime, iban, ordinacija) values
+('Josip', 'Čes', '12345678910121', 2),
+('Sandra', 'Petrović Čes', '11111111111111', 1),
+('Damir', 'Čes','55555555555555', 3);
