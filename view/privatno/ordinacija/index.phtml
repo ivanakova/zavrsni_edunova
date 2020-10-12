@@ -1,12 +1,18 @@
-Ordinacije
-<?php  
+<?php if($_SESSION['autoriziran']->uloga==='doktor'): ?>
+<a class="btn btn-outline-secondary" href="#">Dodaj novu ordinaciju</a>
+<?php endif; ?>
 
-
-?>
-
-<pre>
-
-<?php 
-
-print_r($ordinacije); ?>
-</pre>
+<table class="table table-borderless">
+  <thead>
+    <tr>
+      <th scope="col">Naziv</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach($ordinacije as $ordinacija): ?>
+        <tr>
+            <td><?=$ordinacija->naziv?></td>
+        </tr>
+    <?php endforeach; ?>
+  </tbody>
+</table>

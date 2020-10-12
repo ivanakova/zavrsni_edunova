@@ -14,26 +14,27 @@
       </li>
       
       <?php if(isset($_SESSION['autoriziran'])): ?> 
-        <li class="nav-item">
+              <li class="nav-item">
                 <a class="nav-link" href="<?=APP::config('url') ?>nadzornaploca/index">Nadzorna ploča</a>
               </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="<?=APP::config('url') ?>ordinacija/index">Ordinacije</a>
+                </li>
 
               <?php if($_SESSION['autoriziran']->uloga==='doktor'): ?>
                 <li class="nav-item">
-                <a class="nav-link" href="<?=APP::config('url') ?>doktor/index">Doktori</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="<?=APP::config('url') ?>pacijent/index">Pacijenti</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="<?=APP::config('url') ?>termin/index">Termini</a>
-              </li>
+                  <a class="nav-link" href="<?=APP::config('url') ?>doktor/index">Doktori</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="<?=APP::config('url') ?>pacijent/index">Pacijenti</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="<?=APP::config('url') ?>termin/index">Termini</a>
+                </li>
               <?php endif; ?>
 
               <?php if($_SESSION['autoriziran']->uloga==='pacijent'): ?>
-                <li class="nav-item">
-                  <a class="nav-link" href="<?=APP::config('url') ?>ordinacija/index">Ordinacije</a>
-                </li>
+                
                 <li class="nav-item">
                   <a class="nav-link" href="<?=APP::config('url') ?>doktor/index">Doktori</a>
                 </li>

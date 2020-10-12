@@ -1,4 +1,4 @@
-<?
+<?php
 class Ordinacija
 {
     public static function ucitajSve()
@@ -10,4 +10,3 @@ class Ordinacija
         return $izraz->fetchAll();
     }
 }
-?>
