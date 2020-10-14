@@ -11,4 +11,31 @@ class PacijentController extends AutorizacijaController
             'pacijenti'=>Pacijent::ucitajSve()
         ]);
     }
+
+    public function novi()
+    {
+        if($_SERVER['REQUEST_METHOD']==='GET')
+        {
+            $this->view->render($this->viewDir . 'novi', [
+                'poruka'=>'Unesite tražene podatke!'
+            ]);
+            return; 
+        }
+
+
+        Pacijent::dodajNovi($_POST);
+
+        $this->index();        
+
+    }
+
+    public function promjena()
+    {
+
+    }
+
+    public function brisanje()
+    {
+
+    }
 }

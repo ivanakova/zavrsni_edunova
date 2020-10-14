@@ -1,6 +1,4 @@
-<?php if($_SESSION['autoriziran']->uloga==='doktor'): ?>
-<a class="btn btn-outline-secondary" href="#">Dodaj novog pacijenta</a>
-<?php endif; ?>
+
 
 <table class="table table-borderless">
   <thead>
@@ -14,7 +12,24 @@
             <td><?=$pacijent->ime?></td>
             <td><?=$pacijent->prezime?></td>
             <td><?=$pacijent->mbo?></td>
+            <?php if($_SESSION['autoriziran']->uloga==='doktor'): ?>
+            <td>
+                <a href="<?=APP::config('url') ?>pacijent/promjena?sifra=<?=$pacijent->sifra?>">                
+                  <?php include BP . 'view/predlozak/izgledPromijeni.phtml' ?>
+
+                </a>
+                
+                <a href="<?=APP::config('url') ?>pacijent/brisanje?sifra=<?=$pacijent->sifra?>">
+                <?php include BP . 'view/predlozak/izgledObrisi.phtml' ?>
+                </a>
+            
+            </td>
+            <?php endif; ?>
         </tr>
     <?php endforeach; ?>
   </tbody>
 </table>
+<hr>
+<?php if($_SESSION['autoriziran']->uloga==='doktor'): ?>
+  <a class="btn btn-outline-secondary" href="<?=APP::config('url') ?>pacijent/novi">Dodaj novog pacijenta</a>
+<?php endif; ?>

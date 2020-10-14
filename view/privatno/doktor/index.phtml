@@ -1,6 +1,4 @@
-<?php if($_SESSION['autoriziran']->uloga==='doktor'): ?>
-<a class="btn btn-outline-secondary" href="#">Dodaj novog doktora</a>
-<?php endif; ?>
+
 
 <table class="table table-borderless">
   <thead>
@@ -14,7 +12,24 @@
             <td><?=$doktor->ime?></td>
             <td><?=$doktor->prezime?></td>
             <td><?=$doktor->ordinacija?></td>
+            <?php if($_SESSION['autoriziran']->uloga==='doktor'): ?>
+            <td>
+                <a href="#">                
+                  <?php include BP . 'view/predlozak/izgledPromijeni.phtml' ?>
+
+                </a>
+                
+                <a href="#">
+                <?php include BP . 'view/predlozak/izgledObrisi.phtml' ?>
+                </a>
+            
+            </td>
+            <?php endif; ?> 
         </tr>
     <?php endforeach; ?>
   </tbody>
 </table>
+<hr>
+<?php if($_SESSION['autoriziran']->uloga==='doktor'): ?>
+<a class="btn btn-outline-secondary" href="#">Dodaj novog doktora</a>
+<?php endif; ?>
