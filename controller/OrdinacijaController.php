@@ -14,7 +14,17 @@
 
         public function novi()
         {
-            $this->view->render($this->viewDir . 'novi');
+            if($_SERVER['REQUEST_METHOD']==='GET')
+            {
+                $this->view->render($this->viewDir . 'novi', [
+                    'poruka'=>'Unesite tražene podatke!'
+                ]);
+                return; 
+            }
+
+            Ordinacija::dodajNovi($_POST);
+
+            $this->index();  
         }
 
         public function promjena()

@@ -1,1 +1,5 @@
-Početna
+<?php if(isset($_SESSION['autoriziran'])): ?>
+    <a class="btn btn-outline-secondary" href="<?=APP::config('url') ?>termin/novi"">Zakaži svoj termin</a>
+<?php else: ?>
+    <a class="btn btn-outline-secondary" href="<?=APP::config('url') ?>index/login"">Zakaži svoj termin</a>
+<?php endif; ?>

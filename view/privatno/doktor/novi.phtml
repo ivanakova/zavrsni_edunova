@@ -1,32 +1,30 @@
 <div class="container center_div">
     <div class="div-wrapper d-flex justify-content-center align-items-center">
-        <form action="<?=APP::config('url') ?>pacijent/novi" method="POST">
+        <form action="<?=APP::config('url') ?>doktor/novi" method="POST">
             
-            <h1 class="h3 mb-3 font-weight-normal">Dodaj novog pacijenta</h1>
+            <h1 class="h3 mb-3 font-weight-normal">Dodaj novog doktora</h1>
 
             <div class="form-group">
                 <label>Ime:
-                    <input type="text" name="ime" class="form-control text-center" value="<?=$pacijent['ime']?>">
+                    <input type="text" name="ime" class="form-control text-center">
                 </label>    
                 <br>    
             </div>
             
             <div class="form-group">
                 <label>Prezime:
-                    <input type="text" name="prezime" class="form-control text-center" value="<?=$pacijent['prezime']?>">
+                    <input type="text" name="prezime" class="form-control text-center">
                 </label>    
                 <br>    
             </div>
 
             <div class="form-group">
-                <label>MBO:
-                    <input type="text" name="mbo" class="form-control text-center" value="<?=$pacijent['mbo']?>">
+                <label>IBAN:
+                    <input type="text" name="iban" class="form-control text-center">
                 </label>    
                 <br>    
             </div>
             
-            
-            <a class="btn btn-secondary" href="<?=APP::config('url') ?>pacijent/index">Odustani</a>
             <button class="btn btn-primary" type="submit">Unesi</button>
             
             <br>

@@ -2,7 +2,7 @@ drop database if exists dentalclinic;
 create database dentalclinic default character set utf8;
 use dentalclinic;
 
-#alter database persefon_edunovaPP19 default character set utf8;b
+#alter database persefon_edunovaPP19 default character set utf8;
 
 create table operater(
 sifra int not null primary key auto_increment,
@@ -43,17 +43,11 @@ sifra int not null primary key auto_increment,
 ime varchar(30),
 prezime varchar(30),
 iban char(32),
-pregled datetime
+pregled datetime,
+ordinacija int not null
 );
 
-create table tehnicar(
-sifra int not null primary key auto_increment,
-ime varchar(30),
-prezime varchar(30),
-mbo char(10),
-pregled datetime,
-laboratorij int not null
-);
+
 
 create table pacijent(
 sifra int not null primary key auto_increment,
@@ -67,8 +61,6 @@ create table termin(
 pacijent int not null,
 doktor int not null
 );
-
-alter table tehnicar add foreign key (laboratorij) references laboratorij(sifra);
 
 alter table doktor add foreign key (ordinacija) references ordinacija(sifra);
 

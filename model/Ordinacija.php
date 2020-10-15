@@ -9,4 +9,12 @@ class Ordinacija
         $izraz->execute();
         return $izraz->fetchAll();
     }
+
+    public static function dodajNovi($ordinacija)
+    {
+        $veza = DB::getInstanca();
+        
+        $izraz = $veza->prepare('insert into ordinacija (naziv) values (:naziv);');
+        $izraz->execute($ordinacija);
+    }
 }

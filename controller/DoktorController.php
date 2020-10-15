@@ -11,4 +11,21 @@ class DoktorController extends AutorizacijaController
             'doktori'=>Doktor::ucitajSve()
         ]);
     }
+
+    public function novi()
+    {
+        if($_SERVER['REQUEST_METHOD']==='GET')
+        {
+            $this->view->render($this->viewDir . 'novi', [
+                'poruka'=>'Unesite tražene podatke!'
+            ]);
+            return; 
+        }
+
+
+        Doktor::dodajNovi($_POST);
+
+        $this->index();        
+
+    }
 }

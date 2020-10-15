@@ -31,5 +31,5 @@
 </table>
 <hr>
 <?php if($_SESSION['autoriziran']->uloga==='doktor'): ?>
-<a class="btn btn-outline-secondary" href="#">Dodaj novog doktora</a>
+<a class="btn btn-outline-secondary" href="<?=APP::config('url') ?>doktor/novi">Dodaj novog doktora</a>
 <?php endif; ?>
