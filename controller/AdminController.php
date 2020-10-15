@@ -15,7 +15,6 @@ class AdminController extends AutorizacijaController
                 'email' => '',
                 'poruka' => 'Prvo se autorizirajte s ulogom koja ima ovlasti za rad sa sustavom'
             ]);
-
             exit;
         }        
     }

@@ -12,8 +12,7 @@ class Pacijent
 
     public static function dodajNovi($pacijent)
     {
-        $veza = DB::getInstanca();
-        
+        $veza = DB::getInstanca();        
         $izraz = $veza->prepare('insert into pacijent (ime, prezime, mbo) values (:ime, :prezime, :mbo);');
         $izraz->execute($pacijent);
     }

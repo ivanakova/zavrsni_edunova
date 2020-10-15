@@ -25,6 +25,5 @@ class DB extends PDO
         }
 
         return self::$instanca;
-
     }
 }

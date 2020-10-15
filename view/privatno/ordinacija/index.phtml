@@ -1,35 +1,32 @@
-
-
 <table class="table table-borderless">
   <thead>
     <tr>
       <th scope="col">Popis ordinacija</th>
     </tr>
   </thead>
+  
   <tbody>
     <?php foreach($ordinacije as $ordinacija): ?>
-        <tr>
-            <td><?=$ordinacija->naziv?></td>
-            <?php if($_SESSION['autoriziran']->uloga==='doktor'): ?>
-            <td>
-                <a href="<?=APP::config('url') ?>ordinacija/promjena?sifra=<?=$ordinacija->sifra?>">                
-                  <?php include BP . 'view/predlozak/izgledPromijeni.phtml' ?>
-
-                </a>
-                
-                <a href="<?=APP::config('url') ?>ordinacija/brisanje?sifra=<?=$ordinacija->sifra?>">
-                <?php include BP . 'view/predlozak/izgledObrisi.phtml' ?>
-                </a>
+      <tr>
+        <td><?=$ordinacija->naziv?></td>
+        <?php if($_SESSION['autoriziran']->uloga==='doktor'): ?>
+          <td>
+            <a href="<?=APP::config('url') ?>ordinacija/promjena?sifra=<?=$ordinacija->sifra?>">                
+              <?php include BP . 'view/predlozak/izgledPromijeni.phtml' ?>
+            </a>
             
-            </td>
-            <?php endif; ?>
-
-
-        </tr>
+            <a href="<?=APP::config('url') ?>ordinacija/brisanje?sifra=<?=$ordinacija->sifra?>">
+              <?php include BP . 'view/predlozak/izgledObrisi.phtml' ?>
+            </a>
+          </td>
+        <?php endif; ?>
+      </tr>
     <?php endforeach; ?>
   </tbody>
 </table>
+
 <hr>
+
 <?php if($_SESSION['autoriziran']->uloga==='doktor'): ?>
 <a class="btn btn-outline-secondary" href="<?=APP::config('url') ?>ordinacija/novi">Dodaj novu ordinaciju</a>
 <?php endif; ?>

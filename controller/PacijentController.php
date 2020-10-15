@@ -21,7 +21,6 @@ class PacijentController extends AutorizacijaController
                 'prezime' => '',
                 'mbo' => ''
             ]);
-
             return;
         }
 
@@ -30,7 +29,6 @@ class PacijentController extends AutorizacijaController
         if(strlen(trim($pacijent['ime']))===0)
         {
             $this->novoView('Obavezno unesite ime!', $_POST);
-
             return;
         }
 
@@ -40,7 +38,6 @@ class PacijentController extends AutorizacijaController
         
         //unese i ostavi te s svim podacima na trenutnoj stranici
         //$this->novoView('Pacijent unesen, nastavite s unosom novih podataka',$_POST);
-
     }
 
     public function promjena()

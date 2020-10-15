@@ -23,7 +23,6 @@
             }
 
             Ordinacija::dodajNovi($_POST);
-
             $this->index();  
         }
 

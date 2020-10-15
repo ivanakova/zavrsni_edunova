@@ -12,8 +12,7 @@ class Ordinacija
 
     public static function dodajNovi($ordinacija)
     {
-        $veza = DB::getInstanca();
-        
+        $veza = DB::getInstanca();        
         $izraz = $veza->prepare('insert into ordinacija (naziv) values (:naziv);');
         $izraz->execute($ordinacija);
     }

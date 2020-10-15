@@ -24,8 +24,6 @@ class DoktorController extends AutorizacijaController
 
 
         Doktor::dodajNovi($_POST);
-
-        $this->index();        
-
+        $this->index();
     }
 }

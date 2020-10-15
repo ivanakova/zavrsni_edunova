@@ -12,8 +12,7 @@ class Doktor
 
     public static function dodajNovi($doktor)
     {
-        $veza = DB::getInstanca();
-        
+        $veza = DB::getInstanca();        
         $izraz = $veza->prepare('insert into doktor (ime, prezime, iban) values (:ime, :prezime, :iban);');
         $izraz->execute($doktor);
     }

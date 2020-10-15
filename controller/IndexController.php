@@ -35,8 +35,7 @@ class IndexController extends Controller
             return;
         }
 
-        $this->loginView('', 'Popunite tražene podatke');
-        
+        $this->loginView('', 'Popunite tražene podatke');        
     }
 
     public function logout()
@@ -66,41 +65,35 @@ class IndexController extends Controller
 
         if(strlen(trim($_POST['email']))===0)
         {
-            $this->loginView(trim($_POST['email']), 'Obavezan unos email-a');
-            
+            $this->loginView(trim($_POST['email']), 'Obavezan unos email-a');            
             return;
         }
 
         if(strlen(trim($_POST['lozinka']))===0)
         {
-            $this->loginView(trim($_POST['email']), 'Obavezan unos lozinke');
-            
+            $this->loginView(trim($_POST['email']), 'Obavezan unos lozinke');            
             return;
         }
 
         $veza = DB::getInstanca();
-
         $izraz =$veza->prepare('select * from operater where email=:email');
         $izraz->execute(['email'=>$_POST['email']]);
-
         $rezultat = $izraz->fetch();
         
         if($rezultat==null)
         {
-            $this->loginView(trim($_POST['email']), 'Unesena email adresa ne postoji u sustavu');
-            
+            $this->loginView(trim($_POST['email']), 'Unesena email adresa ne postoji u sustavu');            
             return;
         }
 
         if(!password_verify($_POST['lozinka'], $rezultat->lozinka))
         {
-            $this->loginView(trim($_POST['email']), 'Za uneseni email nije ispravna lozinka');
-            
+            $this->loginView(trim($_POST['email']), 'Za uneseni email nije ispravna lozinka');            
             return; 
         }
 
         //ovdje sam autoriziran
-        unset($rezultat->lozinka);  //rezultat zapisii u session
+        unset($rezultat->lozinka);  //rezultat zapisi u session
 
         $_SESSION['autoriziran']=$rezultat;
         $np=new NadzornaplocaController();

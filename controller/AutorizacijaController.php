@@ -12,7 +12,6 @@ class AutorizacijaController extends Controller
                 'email' => '',
                 'poruka' => 'Prvo se autorizirajte za rad sa sustavom'
             ]);
-
             exit;
         }        
     }
