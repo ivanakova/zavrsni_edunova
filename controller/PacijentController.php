@@ -16,23 +16,21 @@ class PacijentController extends AutorizacijaController
     {
         if($_SERVER['REQUEST_METHOD']==='GET')
         {
-            $this->novoView('Unesite tražene podatke!', [
-                'ime' => '',
-                'prezime' => '',
-                'mbo' => ''
-            ]);
+            $pacijent = new stdClass();
+            $pacijent->ime='';
+            $pacijent->prezime='';
+            $pacijent->mbo='';
+            $this->novoView('Unesite tražene podatke!', $pacijent);
+            
             return;
         }
 
-        $pacijent = $_POST;
+        $pacijent = (object)$_POST;
 
-        if(strlen(trim($pacijent['ime']))===0)
-        {
-            $this->novoView('Obavezno unesite ime!', $_POST);
-            return;
-        }
+        
 
         Pacijent::dodajNovi($_POST);
+        if(!$this->kontrolaIme($pacijent,'promjenaView')){return;}
 
         $this->index();  
         
@@ -42,14 +40,30 @@ class PacijentController extends AutorizacijaController
 
     public function promjena()
     {
+        //echo $_GET['sifra'];
 
+        //print_r(Pacijent::ucitaj($_GET['sifra']));
+
+        if($_SERVER['REQUEST_METHOD']==='GET')
+        {
+            $this->promjenaView('Promijenite željene podatke!', Pacijent::ucitaj($_GET['sifra']));
+
+            return;
+        }
+
+        $pacijent = (object)$_POST;
+        if(!$this->kontrolaIme($pacijent,'promjenaView')){return;}
+
+        Pacijent::promjena($_POST);
+
+        $this->index();
     }
 
     public function brisanje()
     {
         Pacijent::brisanje($_GET['sifra']);
 
-        $this->index();
+        $this->index(); 
 
     }
 
@@ -60,5 +74,24 @@ class PacijentController extends AutorizacijaController
             'pacijent' => $pacijent
         ]);
         return; 
+    }
+
+    private function promjenaView($poruka, $pacijent)
+    {
+        $this->view->render($this->viewDir . 'promjena', [
+            'poruka' => $poruka,
+            'pacijent' => $pacijent
+        ]);
+    }
+
+    private function kontrolaIme($pacijent, $view)
+    {
+        if(strlen(trim($pacijent->ime))===0)
+        {
+            $this->novoView('Obavezno unesite ime!', $pacijent);
+            return false;
+        }
+
+        return true;
     }
 }
