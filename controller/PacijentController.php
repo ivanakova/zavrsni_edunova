@@ -47,6 +47,9 @@ class PacijentController extends AutorizacijaController
 
     public function brisanje()
     {
+        Pacijent::brisanje($_GET['sifra']);
+
+        $this->index();
 
     }
 

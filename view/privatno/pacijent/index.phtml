@@ -16,7 +16,8 @@
               <?php include BP . 'view/predlozak/izgledPromijeni.phtml' ?>
             </a>
             
-            <a href="<?=APP::config('url') ?>pacijent/brisanje?sifra=<?=$pacijent->sifra?>">
+            <a onclick="return confirm('Sigurno obrisati?');"
+              href="<?=APP::config('url') ?>pacijent/brisanje?sifra=<?=$pacijent->sifra?>">
               <?php include BP . 'view/predlozak/izgledObrisi.phtml' ?>
             </a>
           
