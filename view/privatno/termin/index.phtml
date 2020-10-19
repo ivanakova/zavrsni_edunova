@@ -1,1 +1,35 @@
-<a class="btn btn-outline-secondary" href="<?=APP::config('url') ?>termin/novi">Dodaj novi termin</a>
+<table class="table table-borderless">
+  <thead>
+    <tr>
+      <th scope="col">Popis termina</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach($termini as $termin): ?>
+      <tr>
+        <td><?=$termin->pacijent?></td>
+        <td><?=$termin->doktor?></td>
+        <td><?=$termin->pregled?></td>
+        <?php if($_SESSION['autoriziran']->uloga==='doktor'): ?>
+          <td>
+            <a href="<?=APP::config('url') ?>termin/promjena?sifra=<?=$termin->sifra?>">                
+              <?php include BP . 'view/predlozak/izgledPromijeni.phtml' ?>
+            </a>
+            
+            <a onclick="return confirm('Sigurno obrisati?');"
+              href="<?=APP::config('url') ?>termin/brisanje?sifra=<?=$termin->sifra?>">
+              <?php include BP . 'view/predlozak/izgledObrisi.phtml' ?>
+            </a>
+          
+          </td>
+        <?php endif; ?>
+      </tr>
+    <?php endforeach; ?>
+  </tbody>
+</table>
+
+<hr>
+
+<?php if($_SESSION['autoriziran']->uloga==='doktor'): ?>
+  <a class="btn btn-outline-secondary" href="<?=APP::config('url') ?>termin/novi">Dodaj novi termin</a>
+<?php endif; ?>

@@ -61,11 +61,31 @@
         }
 
         private function promjenaView($poruka, $ordinacija)
+        {
+            $this->view->render($this->viewDir . 'promjena', [
+                'poruka' => $poruka,
+                'ordinacija' => $ordinacija
+            ]);
+        }
+
+        private function novoView($poruka, $ordinacija)
+        {
+            $this->view->render($this->viewDir . 'novi', [
+                'poruka' => $poruka,
+                'ordinacija' => $ordinacija
+            ]);
+            return; 
+        }
+
+        private function kontrolaIme($ordinacija, $view)
     {
-        $this->view->render($this->viewDir . 'promjena', [
-            'poruka' => $poruka,
-            'ordinacija' => $ordinacija
-        ]);
+        if(strlen(trim($ordinacija->naziv))===0)
+        {
+            $this->novoView('Obavezno unesite naziv!', $ordinacija);
+            return false;
+        }
+
+        return true;
     }
 
     }

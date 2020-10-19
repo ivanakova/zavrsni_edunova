@@ -17,4 +17,12 @@ class TerminController extends AutorizacijaController
         {
             $this->view->render($this->viewDir . 'novi');
         }
+
+        public function brisanje()
+    {
+        Termin::brisanje($_GET['sifra']);
+
+        $this->index(); 
+
+    }
 }

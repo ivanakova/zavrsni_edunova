@@ -1,33 +1,54 @@
 <div class="container center_div">
     <div class="div-wrapper d-flex justify-content-center align-items-center">
-        <form action="<?=APP::config('url') ?>termin/novi" method="POST">
-            
-            <h1 class="h3 mb-3 font-weight-normal">Dodaj novi termin</h1>
-
-            <div class="form-group">
-                <label>Ime:
-                    <input type="text" name="ime" class="form-control text-center">
-                </label>    
-                <br>    
-            </div>
-            
-            <div class="form-group">
-                <label>Prezime:
-                    <input type="text" name="prezime" class="form-control text-center">
-                </label>    
-                <br>    
-            </div>
-
-            <div class="form-group">
-                <label>MBO:
-                    <input type="text" name="mbo" class="form-control text-center">
-                </label>    
-                <br>    
-            </div>
-            
-            <button class="btn btn-primary" type="submit">Unesi</button>
-            
-            <br>
-        </form>
+        
     </div>
 </div>
+
+
+<form action="<?=APP::config('url') ?>termin/novi" method="POST">
+    <h1 class="h3 mb-3 font-weight-normal">Dodaj novi termin</h1>
+    <div class="form-row">    
+        <div class="form-group col-md-4">
+            <label for="inputEmail4">Ime:</label>
+            <input type="text" class="form-control" id="inputEmail4" >
+        </div>
+        <div class="form-group col-md-4">
+            <label for="inputPassword4">Prezime:</label>
+            <input type="text" class="form-control" id="inputPassword4" >
+        </div>
+        <div class="form-group col-md-4">
+            <label for="inputAddress">MBO:</label>
+            <input type="text" class="form-control" id="inputAddress">
+        </div>
+    </div>
+    <div class="form-row">     
+        <div class="form-group col-md-6">
+        <label for="inputState">Ordinacija:</label>
+            <select id="inputState" class="form-control">
+                <option selected>Odaberi...</option>
+                <option>...</option>
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+        <label for="inputState">Doktor:</label>
+            <select id="inputState" class="form-control">
+                <option selected>Odaberi...</option>
+                <option>...</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form row">
+        <div class="form-froup col-md-6">
+            <label for="example-date-input" >Datum:</label>        
+            <input class="form-control" type="date" id="example-date-input">            
+        </div>
+        <div class="form-group col-md-6">
+            <label for="example-time-input" >Vrijeme:</label>  
+            <input class="form-control" type="time" id="example-time-input">
+        </div>
+    </div>
+    
+    <a class="btn btn-secondary" href="<?=APP::config('url') ?>termin/index">Odustani</a>
+    <button type="submit" class="btn btn-primary">Zakaži termin</button>
+</form>
