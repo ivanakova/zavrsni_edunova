@@ -24,6 +24,17 @@
                 </label>    
                 <br>    
             </div>
+
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Odaberi ordinaciju
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <?php foreach ($ordinacije as $ordinacija): ?>
+                    <a class="dropdown-item" href=""><?=$ordinacija->naziv ?></a>
+                <?php endforeach; ?>
+                </div>
+            </div>
             
             <button class="btn btn-primary" type="submit">Unesi</button>
             

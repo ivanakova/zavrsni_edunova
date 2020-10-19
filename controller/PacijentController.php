@@ -30,7 +30,7 @@ class PacijentController extends AutorizacijaController
         
 
         Pacijent::dodajNovi($_POST);
-        if(!$this->kontrolaIme($pacijent,'promjenaView')){return;}
+        if(!$this->kontrolaIme($pacijent,'novoView')){return;}
 
         $this->index();  
         

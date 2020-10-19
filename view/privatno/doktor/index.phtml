@@ -6,18 +6,18 @@
   </thead>
   
   <tbody>
-    <?php foreach($doktori as $doktor): ?>
+    <?php foreach($entiteti as $entitet): ?>
       <tr>
-        <td><?=$doktor->ime?></td>
-        <td><?=$doktor->prezime?></td>
-        <td><?=$doktor->ordinacija?></td>
+        <td><?=$entitet->ime?></td>
+        <td><?=$entitet->prezime?></td>
+        <td><?=$entitet->naziv?></td>
         <?php if($_SESSION['autoriziran']->uloga==='doktor'): ?>
           <td>
-            <a href="#">
+            <a href="<?=APP::config('url') ?>doktor/promjena?sifra=<?=$entitet->sifra?>">
               <?php include BP . 'view/predlozak/izgledPromijeni.phtml' ?>
             </a>
             
-            <a href="#">
+            <a href="<?=APP::config('url') ?>doktor/brisanje?sifra=<?=$entitet->sifra?>">
               <?php include BP . 'view/predlozak/izgledObrisi.phtml' ?>
             </a>
           </td>

@@ -5,15 +5,29 @@ class Doktor
     {
         $veza = DB::getInstanca();
         
-        $izraz = $veza->prepare("SELECT * FROM doktor");
+        $izraz = $veza->prepare("select b.sifra, b.ime, b.prezime, a.naziv from ordinacija a right join doktor b on a.sifra= b.ordinacija;");
         $izraz->execute();
         return $izraz->fetchAll();
     }
 
-    public static function dodajNovi($doktor)
+    public static function dodajNovi($entitet)
     {
-        $veza = DB::getInstanca();        
-        $izraz = $veza->prepare('insert into doktor (ime, prezime, iban) values (:ime, :prezime, :iban);');
-        $izraz->execute($doktor);
+        $veza = DB::getInstanca(); 
+        $veza->beginTransaction();       
+        $izraz = $veza->prepare('insert into ordinacija (naziv) values (:naziv);');
+        $izraz->execute([
+            'naziv'=>$entitet['ordinacija']
+        ]);
+
+        $zadnjaSifra=$veza->lastInsertId();
+        $izraz= $veza->prepare('insert into doktor (ime, prezime, iban, ordinacija) values (:ime, :prezime, :iban, :ordinacija);');
+        $izraz->execute([
+            'ordinacija'=>$zadnjaSifra,
+            'ime'=>$entitet['ime'],
+            'prezime'=>$entitet['prezime'],
+            'iban'=>$entitet['iban']
+        ]);
+
+        $veza->commit();
     }
 }
