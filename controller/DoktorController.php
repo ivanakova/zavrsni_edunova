@@ -14,11 +14,6 @@ class DoktorController extends AutorizacijaController
 
     public function novi()
     {
-        $this->view->render($this->viewDir . 'novi',[
-            'entiteti'=>Doktor::ucitajSve(),
-            'ordinacije'=>Doktor::ucitajSve()
-        ]);
-
         if($_SERVER['REQUEST_METHOD']==='GET')
         {
             $entitet = new stdClass();
@@ -30,17 +25,14 @@ class DoktorController extends AutorizacijaController
         }
 
         $entitet = (object)$_POST;
-        $ordinacija = (object)$_POST;
 
-        if(!$this->kontrolaIme($entitet,'novoView')){return;}
-
-        
+        if(!$this->kontrolaIme($entitet,'novoView')){return;}        
 
         Doktor::dodajNovi($_POST);
         $this->index();
     }
 
-    public function novoView( $entitet)
+    public function novoView($entitet)
     {
         $this->view->render($this->viewDir . 'novi',[
             
