@@ -5,7 +5,7 @@ class Doktor
     {
         $veza = DB::getInstanca();
         
-        $izraz = $veza->prepare("select b.sifra, b.ime, b.prezime, b.iban, a.naziv from ordinacija a right join doktor b on a.sifra= b.ordinacija;");
+        $izraz = $veza->prepare('select b.sifra, b.ime, b.prezime, b.iban, a.naziv from ordinacija a right join doktor b on a.sifra= b.ordinacija;');
         $izraz->execute();
         return $izraz->fetchAll();
     }
@@ -14,9 +14,12 @@ class Doktor
     {
         $veza = DB::getInstanca( );
         
-        $izraz = $veza->prepare("select b.sifra, b.ime, b.prezime, b.iban, a.naziv from ordinacija a right join doktor b on a.sifra= b.ordinacija;");
+        $izraz = $veza->prepare('SELECT b.sifra, b.ime, b.prezime, b.iban, a.naziv from ordinacija a right join doktor b on a.sifra= b.ordinacija where sifra=:sifra;');
         $izraz->execute(['sifra'=>$sifra]);
-        return $izraz->fetch();
+        $entitet=$izraz->fetchAll();
+
+        return $entitet;
+
     }
 
     public function novi()
@@ -48,31 +51,10 @@ class Doktor
     {
         $veza = DB::getInstanca(); 
         $veza->beginTransaction();       
-        $izraz = $veza->prepare('insert into ordinacija (naziv) values (:naziv);');
+        $izraz = $veza->prepare('insert into doktor (ime, prezime, iban, ordinacija) values (:ime, :prezime, :iban, :ordinacija);');
 
 
-        $izraz->execute([
-            'naziv'=>$entitet['ordinacija']
-        ]);
-
-        $zadnjaSifra=$veza->lastInsertId();
-        $izraz= $veza->prepare('insert into doktor (ime, prezime, iban, ordinacija) values (:ime, :prezime, :iban, :ordinacija);');
-        $izraz->execute([
-            'ordinacija'=>$zadnjaSifra,
-            'ime'=>$entitet['ime'],
-            'prezime'=>$entitet['prezime'],
-            'iban'=>$entitet['iban']
-        ]);
-
-        $veza->commit();
-    }
-
-    private function novoView($poruka,$entitet)
-    {
-        $this->view->render($this->viewDir . 'novo',[
-            'poruka'=>$poruka,
-            'entitet' => $entitet
-        ]);
+        $izraz->execute($entitet);
     }
 
     public static function brisanje($sifra)
@@ -84,8 +66,32 @@ class Doktor
 
     public static function promjena($doktor)
     {
-        $veza = DB::getInstanca();        
-        $izraz = $veza->prepare('select ordinacija from doktor where sifra=:sifra');
-        $izraz->execute($doktor);
+        $veza = DB::getInstanca();
+        $veza->beginTransaction();
+
+        $izraz = $veza->prepare('select ordinacija from doktor where sifra=:sifra;');
+
+        $izraz->execute(['sifra'=>$entitet['sifra']]);
+        $sifraOrdinacija = $izraz->fetchColumn();
+
+        $izraz = $veza->prepare('update ordinacija set naziv=:naziv where sifra=:sifra');
+
+        $izraz->execute([
+            'naziv'=>$entitet['naziv'],
+            'sifra'=>$sifraOrdinacija
+        ]);
+
+        $izraz = $veza->prepare('update doktor set ime=:ime, prezime=:prezime, iban=:iban where sifra=:sifra');
+
+        $izraz->execute([
+            'sifra'=>$entitet['sifra'],
+            'ime'=>$entitet['ime'],
+            'prezime'=>$entitet['prezime'],
+            'iban'=>$entitet['iban']
+        ]);
+
+        $veza->commit();
     }
+
+    
 }

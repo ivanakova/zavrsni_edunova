@@ -2,7 +2,7 @@
     <div class="div-wrapper d-flex justify-content-center align-items-center">
         <form action="<?=APP::config('url') ?>doktor/promjena" method="POST">
             
-            <h1 class="h3 mb-3 font-weight-normal">Dodaj novog doktora</h1>
+            <h1 class="h3 mb-3 font-weight-normal">Promijeni podatke</h1>
 
             <div class="form-group">
                 <label>Ime:
@@ -21,9 +21,17 @@
             <div class="form-group">
                 <label>IBAN:
                     <input type="text" name="iban" class="form-control text-center" value="<?=$entitet->iban?>">
-                </label>    
+                </label>
                 <br>    
             </div>
+
+            <div class="form-group">
+        <label for="inputState">Ordinacija:</label>
+            <select id="inputState" class="form-control">
+                <option selected>Odaberi...</option>
+                
+            </select>
+        </div>
 
             
             

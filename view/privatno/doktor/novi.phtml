@@ -6,25 +6,36 @@
 
             <div class="form-group">
                 <label>Ime:
-                    <input type="text" name="ime" class="form-control text-center" value="$entitet->ime">
+                    <input type="text" name="ime" class="form-control text-center" value="<?php $entitet->ime; ?>">
                 </label>    
                 <br>    
             </div>
             
             <div class="form-group">
                 <label>Prezime:
-                    <input type="text" name="prezime" class="form-control text-center" value="$entitet->prezime">
+                    <input type="text" name="prezime" class="form-control text-center" value="<?php $entitet->prezime; ?>">
                 </label>    
                 <br>    
             </div>
 
             <div class="form-group">
                 <label>IBAN:
-                    <input type="text" name="iban" class="form-control text-center" value="$entitet->iban">
+                    <input type="text" name="iban" class="form-control text-center" value="<?php $entitet->iban; ?>">
                 </label>    
                 <br>    
             </div>
-            
+
+            <div class="form-group">
+                <label >Ordinacija:</label>
+                <select name="ordinacija" id="ordinacija" class="form-control">
+                    <option selected>Odaberi...</option>
+                    <?php foreach($ordinacije as $ordinacija): ?>
+                        <option <?php if($entitet->ordinacija==$ordinacija->sifra){ echo ' selected="selected"';} ?>Value="<?=$ordinacija->sifra?>"><?=$ordinacija->naziv?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+
+                 
             
             <button class="btn btn-primary" type="submit">Unesi</button>
             

@@ -21,19 +21,43 @@ class DoktorController extends AutorizacijaController
             $entitet->prezime = '';
             $entitet->iban = '';
             $entitet->ordinacija = '';
-            $this->novoView('Unesite tražene podatke!', $entitet, Ordinacija::ucitajSve(), Doktor::ucitajSve());
+            $this->novoView('Unesite tražene podatke!', $entitet, Ordinacija::ucitajSve());
             return; 
         }
 
         $entitet = (object)$_POST;
 
-        if(!$this->kontrolaIme($entitet,'novoView')){return;}        
+        //if(!$this->kontrolaIme($entitet,'novoView')){return;}        
 
         Doktor::dodajNovi($_POST);
         $this->index();
     }
 
-    public function novoView($entitet, $poruka, $ordinacije, $doktori)
+    public function promjena()
+    {
+        $doktor= Doktor::ucitaj($_GET['sifra']);
+
+        if ($_SERVER['REQUEST_METHOD']==='GET'){
+            $this->promjenaView('Promjenite željene podatke',
+            $doktor);
+            return;
+        }
+
+        $entitet=(object)$_POST;
+        
+        Doktor::promjena($_POST);
+        $this->index();
+    }
+
+    public function brisanje()
+    {
+        Doktor::brisanje($_GET['sifra']);
+
+        $this->index(); 
+
+    }
+
+    public function novoView($poruka, $entitet, $ordinacije)
     {
         $this->view->render($this->viewDir . 'novi',[
             
@@ -44,6 +68,14 @@ class DoktorController extends AutorizacijaController
         ]);
     }
 
+    private function promjenaView($poruka, $entitet)
+        {
+            $this->view->render($this->viewDir . 'promjena', [
+                'poruka' => $poruka,
+                'entitet' => $entitet
+            ]);
+        }
+    /*
     public function kontrolaIme($entitet, $view)
     {
         if(strlen(trim($entitet->ime))===0)
@@ -55,37 +87,12 @@ class DoktorController extends AutorizacijaController
 
         return true;
     }
-
-    private function promjenaView($poruka, $entitet)
-    {
-        $this->view->render($this->viewDir . 'promjena', [
-            'poruka' => $poruka,
-            'entitet' => $entitet
-        ]);
-    }
-
-    public function brisanje()
-    {
-        Doktor::brisanje($_GET['sifra']);
-
-        $this->index(); 
-
-    }
-
-    public function promjena()
-        {
-            if($_SERVER['REQUEST_METHOD']==='GET')
-            {
-                $this->promjenaView('Promijenite željene podatke!', Doktor::ucitaj($_GET['sifra']));
+*/
     
-                return;
-            }
+
     
-            $doktor = (object)$_POST;
-            
+
     
-            Doktor::promjena($_POST);
-    
-            $this->index();
-        }
+
+        
 }
