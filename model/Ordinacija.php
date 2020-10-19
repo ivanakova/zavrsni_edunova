@@ -35,6 +35,8 @@ class Ordinacija
 
     public static function brisanje($sifra)
     {
-        
+        $veza = DB::getInstanca();        
+        $izraz = $veza->prepare('delete from ordinacija where sifra=:sifra;');
+        $izraz->execute(['sifra'=>$sifra]);
     }
 }
