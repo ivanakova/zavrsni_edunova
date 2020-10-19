@@ -6,35 +6,25 @@
 
             <div class="form-group">
                 <label>Ime:
-                    <input type="text" name="ime" class="form-control text-center">
+                    <input type="text" name="ime" class="form-control text-center" value="$entitet->ime">
                 </label>    
                 <br>    
             </div>
             
             <div class="form-group">
                 <label>Prezime:
-                    <input type="text" name="prezime" class="form-control text-center">
+                    <input type="text" name="prezime" class="form-control text-center" value="$entitet->prezime">
                 </label>    
                 <br>    
             </div>
 
             <div class="form-group">
                 <label>IBAN:
-                    <input type="text" name="iban" class="form-control text-center">
+                    <input type="text" name="iban" class="form-control text-center" value="$entitet->iban">
                 </label>    
                 <br>    
             </div>
-
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Odaberi ordinaciju
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <?php foreach ($ordinacije as $ordinacija): ?>
-                    <a class="dropdown-item" href=""><?=$ordinacija->naziv ?></a>
-                <?php endforeach; ?>
-                </div>
-            </div>
+            
             
             <button class="btn btn-primary" type="submit">Unesi</button>
             

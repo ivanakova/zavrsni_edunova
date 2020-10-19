@@ -5,9 +5,18 @@ class Doktor
     {
         $veza = DB::getInstanca();
         
-        $izraz = $veza->prepare("select b.sifra, b.ime, b.prezime, a.naziv from ordinacija a right join doktor b on a.sifra= b.ordinacija;");
+        $izraz = $veza->prepare("select b.sifra, b.ime, b.prezime, b.iban, a.naziv from ordinacija a right join doktor b on a.sifra= b.ordinacija;");
         $izraz->execute();
         return $izraz->fetchAll();
+    }
+
+    public static function ucitaj($sifra)
+    {
+        $veza = DB::getInstanca( );
+        
+        $izraz = $veza->prepare("select b.sifra, b.ime, b.prezime, b.iban, a.naziv from ordinacija a right join doktor b on a.sifra= b.ordinacija;");
+        $izraz->execute(['sifra'=>$sifra]);
+        return $izraz->fetch();
     }
 
     public function novi()
@@ -40,6 +49,8 @@ class Doktor
         $veza = DB::getInstanca(); 
         $veza->beginTransaction();       
         $izraz = $veza->prepare('insert into ordinacija (naziv) values (:naziv);');
+
+
         $izraz->execute([
             'naziv'=>$entitet['ordinacija']
         ]);
@@ -69,5 +80,12 @@ class Doktor
         $veza = DB::getInstanca();        
         $izraz = $veza->prepare('delete from doktor where sifra=:sifra;');
         $izraz->execute(['sifra'=>$sifra]);
+    }
+
+    public static function promjena($doktor)
+    {
+        $veza = DB::getInstanca();        
+        $izraz = $veza->prepare('select ordinacija from doktor where sifra=:sifra');
+        $izraz->execute($doktor);
     }
 }

@@ -17,17 +17,14 @@
             if($_SERVER['REQUEST_METHOD']==='GET')
         {
             $ordinacija = new stdClass();
-            $ordinacija->ime='';
-            $ordinacija->prezime='';
-            $ordinacija->mbo='';
+            $ordinacija->naziv='';
             $this->novoView('Unesite tražene podatke!', $ordinacija);
             
             return;
         }
 
         $ordinacija = (object)$_POST;
-
-        
+     
 
         Ordinacija::dodajNovi($_POST);
         if(!$this->kontrolaIme($ordinacija,'novoView')){return;}

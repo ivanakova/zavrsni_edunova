@@ -20,7 +20,8 @@ class DoktorController extends AutorizacijaController
             $entitet->ime = '';
             $entitet->prezime = '';
             $entitet->iban = '';
-            $this->novoView('Unesite tražene podatke!', $entitet);
+            $entitet->ordinacija = '';
+            $this->novoView('Unesite tražene podatke!', $entitet, Ordinacija::ucitajSve(), Doktor::ucitajSve());
             return; 
         }
 
@@ -32,11 +33,14 @@ class DoktorController extends AutorizacijaController
         $this->index();
     }
 
-    public function novoView($entitet)
+    public function novoView($entitet, $poruka, $ordinacije, $doktori)
     {
         $this->view->render($this->viewDir . 'novi',[
             
-            'entitet' => $entitet
+            'entitet' => $entitet,
+            'poruka' => $poruka,
+            'ordinacije' => $ordinacije,
+            'doktori' =>  $doktori
         ]);
     }
 
@@ -67,4 +71,21 @@ class DoktorController extends AutorizacijaController
         $this->index(); 
 
     }
+
+    public function promjena()
+        {
+            if($_SERVER['REQUEST_METHOD']==='GET')
+            {
+                $this->promjenaView('Promijenite željene podatke!', Doktor::ucitaj($_GET['sifra']));
+    
+                return;
+            }
+    
+            $doktor = (object)$_POST;
+            
+    
+            Doktor::promjena($_POST);
+    
+            $this->index();
+        }
 }
