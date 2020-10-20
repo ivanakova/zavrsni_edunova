@@ -63,8 +63,7 @@ class DoktorController extends AutorizacijaController
             
             'entitet' => $entitet,
             'poruka' => $poruka,
-            'ordinacije' => $ordinacije,
-            'doktori' =>  $doktori
+            'ordinacije' => $ordinacije
         ]);
     }
 

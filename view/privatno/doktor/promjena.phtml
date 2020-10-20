@@ -6,7 +6,7 @@
 
             <div class="form-group">
                 <label>Ime:
-                    <input type="text" name="ime" class="form-control text-center" value="<?=$entitet->ime?>">
+                    <input type="text" name="ime" id="ime" class="form-control text-center" value="<?=$entitet->ime?>">
                 </label>    
                 <br>    
             </div>
@@ -26,12 +26,14 @@
             </div>
 
             <div class="form-group">
-        <label for="inputState">Ordinacija:</label>
-            <select id="inputState" class="form-control">
-                <option selected>Odaberi...</option>
-                
-            </select>
-        </div>
+                <label >Ordinacija:</label>
+                <select name="ordinacija" id="ordinacija" class="form-control">
+                    <option selected>Odaberi...</option>
+                    <?php foreach($ordinacije as $ordinacija): ?>
+                        <option <?php if($entitet->ordinacija==$ordinacija->sifra){ echo ' selected="selected"';} ?>Value="<?=$ordinacija->sifra?>"><?=$ordinacija->naziv?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
 
             
             

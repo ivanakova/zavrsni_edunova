@@ -14,9 +14,9 @@ class Doktor
     {
         $veza = DB::getInstanca( );
         
-        $izraz = $veza->prepare('SELECT b.sifra, b.ime, b.prezime, b.iban, a.naziv from ordinacija a right join doktor b on a.sifra= b.ordinacija where sifra=:sifra;');
+        $izraz = $veza->prepare('SELECT b.sifra, b.ime, b.prezime, b.iban, a.naziv from ordinacija a right join doktor b on a.sifra= b.ordinacija;');
         $izraz->execute(['sifra'=>$sifra]);
-        $entitet=$izraz->fetchAll();
+        $entitet=$izraz->fetch();
 
         return $entitet;
 
