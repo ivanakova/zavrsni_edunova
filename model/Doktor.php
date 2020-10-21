@@ -62,7 +62,5 @@ class Doktor
             'iban'=>$entitet['iban'],
             'ordinacija'=>$entitet['ordinacija']
         ]);
-    }
-
-    
+    }    
 }

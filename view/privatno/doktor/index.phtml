@@ -14,9 +14,7 @@
         <td><?=$entitet->naziv?></td>
         <?php if($_SESSION['autoriziran']->uloga==='doktor'): ?>
           <td>
-            <a href="<?=APP::config('url') ?>doktor/promjena?sifra=<?=$entitet->sifra?>">
-              <?php include BP . 'view/predlozak/izgledPromijeni.phtml' ?>
-            </a>
+            
             
             <a href="<?=APP::config('url') ?>doktor/brisanje?sifra=<?=$entitet->sifra?>">
               <?php include BP . 'view/predlozak/izgledObrisi.phtml' ?>
