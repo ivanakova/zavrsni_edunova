@@ -8,7 +8,8 @@ class DoktorController extends AutorizacijaController
     public function index()
     {
         $this->view->render($this->viewDir . 'index',[
-            'entiteti'=>Doktor::ucitajSve()
+            'entiteti'=>Doktor::ucitajSve(),
+            'ordinacije'=>Ordinacija::ucitajSve()
         ]);
     }
 

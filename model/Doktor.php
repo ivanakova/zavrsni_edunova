@@ -23,31 +23,6 @@ class Doktor
 
     }
 
-    public function novi()
-    {
-        if($_SERVER['REQUEST_METHOD']==='GET')
-        {
-            $entitet = new stdClass();
-            $entitet->ime='';
-            $entitet->prezime='';
-            $entitet->iban='';
-            $entitet->ordinacija='';
-            $this->novoView('Unesite tražene podatke!', $entitet);
-            
-            return;
-        }
-
-        $entitet = (object)$_POST;
-        
-        if(!$this->kontrolaIme($entitet,'novoView')){return;}
-        Doktor::dodajNovi($_POST);        
-
-        $this->index();  
-        
-        //unese i ostavi te s svim podacima na trenutnoj stranici
-        //$this->novoView('Pacijent unesen, nastavite s unosom novih podataka',$_POST);
-    }
-
     public static function dodajNovi($entitet)
     {
         print_r($entitet);

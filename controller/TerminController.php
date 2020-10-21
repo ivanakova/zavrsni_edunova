@@ -11,9 +11,7 @@ class TerminController extends AutorizacijaController
         $this->view->render($this->viewDir . 'index',[
             'entiteti'=>Termin::ucitajSve()
         ]);
-    }
-
-    
+    }   
 
     public function novi()
     {
