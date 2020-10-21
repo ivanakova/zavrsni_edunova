@@ -18,13 +18,10 @@ class TerminController extends AutorizacijaController
         if($_SERVER['REQUEST_METHOD']==='GET')
         {
             $entitet = new stdClass();
-            $entitet->ime = '';
-            $entitet->prezime = '';
-            $entitet->mbo = '';
-            $entitet->ordinacija = '';
-            $entitet->doktor = '';
-            $entitet->termin = '';
-            $this->novoView('Unesite tražene podatke!', $entitet, Ordinacija::ucitajSve(), Doktor::ucitajSve(), Pacijent::ucitajSve());
+            $entitet->pacijent = 0;
+            $entitet->doktor = 0;
+            $entitet->datum = '';
+            $this->novoView('Unesite tražene podatke!', $entitet);
             return; 
         }
 
@@ -39,7 +36,7 @@ class TerminController extends AutorizacijaController
     public function promjena()
     {
         $entitet= Termin::ucitaj($_GET['sifra']);
-        $entitet->termin=str_replace(' ', 'T', $entitet->termin);
+        $entitet->datum=str_replace(' ', 'T', $entitet->datum);
 
         if ($_SERVER['REQUEST_METHOD']==='GET'){
             $this->promjenaView('Promjenite željene podatke',
@@ -68,7 +65,6 @@ class TerminController extends AutorizacijaController
             'entitet' => $entitet,
             'poruka' => $poruka,
             'pacijenti' => Pacijent::ucitajSve(),
-            'ordinacije' => Ordinacija::ucitajSve(),
             'doktori' => Doktor::ucitajSve()
         ]);
     }
@@ -78,7 +74,6 @@ class TerminController extends AutorizacijaController
             $this->view->render($this->viewDir . 'promjena', [
                 'poruka' => $poruka,
                 'entitet' => $entitet,
-                'ordinacije' => Ordinacija::ucitajSve(),
                 'doktori' => Doktor::ucitajSve()
             ]);
         }

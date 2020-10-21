@@ -4,10 +4,10 @@ class Termin
     public static function ucitajSve()
     {
         $veza = DB::getInstanca();        
-        $izraz = $veza->prepare("select a.sifra, concat_ws(' ', a.ime, a.prezime) as pacijent, 
-                                    b.sifra, concat_ws(' ', b.ime, b.prezime) as doktor, b.pregled from pacijent a 
-                                inner join doktor b on a.pregled=b.pregled
-                                left join termin c on pacijent=c.pacijent;");
+        $izraz = $veza->prepare("select concat_ws (' ', a.ime, a.prezime) as pacijent, 
+                                        concat_ws (' ', b.ime, b.prezime) as doktor, c.datum, c.sifra from pacijent a
+                                inner join termin c on a.sifra=c.pacijent
+                                left join doktor b on b.sifra=c.doktor");
         $izraz->execute();
         return $izraz->fetchAll();
     }
@@ -32,7 +32,6 @@ class Termin
 
     public static function dodajNovi($entitet)
     {
-        print_r($entitet);
         if($entitet['datum']==''){
             $entitet['datum']=null;
         }else{
@@ -40,7 +39,7 @@ class Termin
         }
 
         $veza = DB::getInstanca();      
-        $izraz = $veza->prepare('update pacijent set pregled=:datum;');
+        $izraz = $veza->prepare('insert into termin (pacijent, doktor, datum) values (:pacijent, :doktor, :datum);');
         
         $izraz->execute($entitet);
     }
@@ -52,34 +51,5 @@ class Termin
         $izraz->execute(['sifra'=>$sifra]);
     }
 
-    public static function promjena($doktor)
-    {
-        $veza = DB::getInstanca();
-        $veza->beginTransaction();
-
-        $izraz = $veza->prepare('select ordinacija from doktor where sifra=:sifra;');
-
-        $izraz->execute(['sifra'=>$entitet['sifra']]);
-        $sifraOrdinacija = $izraz->fetchColumn();
-
-        $izraz = $veza->prepare('update ordinacija set naziv=:naziv where sifra=:sifra');
-
-        $izraz->execute([
-            'naziv'=>$entitet['naziv'],
-            'sifra'=>$sifraOrdinacija
-        ]);
-
-        $izraz = $veza->prepare('update doktor set ime=:ime, prezime=:prezime, iban=:iban where sifra=:sifra');
-
-        $izraz->execute([
-            'sifra'=>$entitet['sifra'],
-            'ime'=>$entitet['ime'],
-            'prezime'=>$entitet['prezime'],
-            'iban'=>$entitet['iban']
-        ]);
-
-        $veza->commit();
-    }
-
-    
+        
 }

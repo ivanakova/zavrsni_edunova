@@ -8,8 +8,7 @@ class DoktorController extends AutorizacijaController
     public function index()
     {
         $this->view->render($this->viewDir . 'index',[
-            'entiteti'=>Doktor::ucitajSve(),
-            'ordinacije'=>Ordinacija::ucitajSve()
+            'entiteti'=>Doktor::ucitajSve()
         ]);
     }
 
@@ -40,7 +39,7 @@ class DoktorController extends AutorizacijaController
 
         if ($_SERVER['REQUEST_METHOD']==='GET'){
             $this->promjenaView('Promjenite željene podatke',
-            $entitet);
+            $entitet, Ordinacija::ucitajSve());
             return;
         }
 
@@ -68,11 +67,12 @@ class DoktorController extends AutorizacijaController
         ]);
     }
 
-    private function promjenaView($poruka, $entitet)
+    private function promjenaView($poruka, $entitet, $ordinacije)
         {
             $this->view->render($this->viewDir . 'promjena', [
                 'poruka' => $poruka,
-                'entitet' => $entitet
+                'entitet' => $entitet,
+                'ordinacije' => $ordinacije
             ]);
         }
     /*
@@ -81,10 +81,8 @@ class DoktorController extends AutorizacijaController
         if(strlen(trim($entitet->ime))===0)
         {
             $this->$view('Obavezan unos imena', $entitet);
-
             return false;
         }
-
         return true;
     }
 */

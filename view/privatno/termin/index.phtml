@@ -14,15 +14,12 @@
       <tr>
         <td><?=$entitet->pacijent?></td>
         <td><?=$entitet->doktor?></td>
-        <td><?=$entitet->pregled?></td>
+        <td><?=$entitet->datum?></td>
         <?php if($_SESSION['autoriziran']->uloga==='doktor'): ?>
           <td>
-            <a href="<?=APP::config('url') ?>termin/promjena?sifra=<?=$termin->sifra?>">                
-              <?php include BP . 'view/predlozak/izgledPromijeni.phtml' ?>
-            </a>
-            
+                      
             <a onclick="return confirm('Sigurno obrisati?');"
-              href="<?=APP::config('url') ?>termin/brisanje?sifra=<?=$termin->sifra?>">
+              href="<?=APP::config('url') ?>termin/brisanje?sifra=<?=$entitet->sifra?>">
               <?php include BP . 'view/predlozak/izgledObrisi.phtml' ?>
             </a>
           
