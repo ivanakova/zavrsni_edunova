@@ -58,6 +58,7 @@ pregled datetime
 );
 
 create table termin(
+sifra int not null primary key auto_increment,
 pacijent int not null,
 doktor int not null
 );

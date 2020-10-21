@@ -35,11 +35,11 @@ class DoktorController extends AutorizacijaController
 
     public function promjena()
     {
-        $doktor= Doktor::ucitaj($_GET['sifra']);
+        $entitet= Doktor::ucitaj($_GET['sifra']);
 
         if ($_SERVER['REQUEST_METHOD']==='GET'){
             $this->promjenaView('Promjenite željene podatke',
-            $doktor);
+            $entitet);
             return;
         }
 

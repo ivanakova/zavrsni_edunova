@@ -29,8 +29,8 @@
                 <label >Ordinacija:</label>
                 <select name="ordinacija" id="ordinacija" class="form-control">
                     <option selected>Odaberi...</option>
-                    <?php foreach($ordinacije as $ordinacija): ?>
-                        <option <?php if($entitet->ordinacija==$ordinacija->sifra){ echo ' selected="selected"';} ?>Value="<?=$ordinacija->sifra?>"><?=$ordinacija->naziv?></option>
+                    <?php foreach($entitet->ordinacije as $ordinacija): ?>
+                        <option <?php $ordinacija->naziv?>?>Value="<?=$ordinacija->sifra?>"><?=$ordinacija->naziv?></option>
                     <?php endforeach; ?>
                 </select>
             </div>

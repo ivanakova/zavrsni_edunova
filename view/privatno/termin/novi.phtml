@@ -3,15 +3,27 @@
     <div class="form-row">    
         <div class="form-group col-md-4">
             <label for="inputEmail4">Ime:</label>
-            <input type="text" class="form-control" id="inputEmail4" >
+            <select id="inputState" class="form-control">
+                <option selected>Odaberi...</option>
+                <?php foreach($pacijenti as $pacijent): ?>
+                <option <?php if($entitet->ime==$pacijent->sifra){ echo ' selected="selected" ';}?> 
+                value="<?=$pacijent->sifra?>"><?=$pacijent->ime?></option>
+                <?php endforeach; ?>
+            </select>
         </div>
         <div class="form-group col-md-4">
             <label for="inputPassword4">Prezime:</label>
-            <input type="text" class="form-control" id="inputPassword4" >
+            <<select id="inputState" class="form-control">
+                <option selected>Odaberi...</option>
+                <?php foreach($pacijenti as $pacijent): ?>
+                <option <?php if($entitet->prezime==$pacijent->sifra){ echo ' selected="selected" ';}?> 
+                value="<?=$pacijent->sifra?>"><?=$pacijent->prezime?></option>
+                <?php endforeach; ?>
+            </select>
         </div>
         <div class="form-group col-md-4">
             <label for="inputAddress">MBO:</label>
-            <input type="text" class="form-control" id="inputAddress">
+            <input type="text" class="form-control" id="inputAddress" value="<?=$entitet->mbo?>">
         </div>
     </div>
     <div class="form-row">     
@@ -19,26 +31,29 @@
         <label for="inputState">Ordinacija:</label>
             <select id="inputState" class="form-control">
                 <option selected>Odaberi...</option>
-                <option>...</option>
+                <option selected>Odaberi...</option>
+                <?php foreach($ordinacije as $ordinacija): ?>
+                <option <?php if($entitet->ordinacija==$ordinacija->sifra){ echo ' selected="selected" ';}?> 
+                value="<?=$ordinacija->sifra?>"><?=$ordinacija->naziv?></option>
+                <?php endforeach; ?>
             </select>
         </div>
         <div class="form-group col-md-6">
         <label for="inputState">Doktor:</label>
             <select id="inputState" class="form-control">
-                <option selected>Odaberi...</option>
-                <option>...</option>
+            <option selected>Odaberi...</option>
+                <?php foreach($doktori as $doktor): ?>
+                <option <?php if($entitet->doktor==$doktor->sifra){ echo ' selected="selected" ';}?> 
+                value="<?=$doktor->sifra?>"><?=$doktor->ime?></option>
+                <?php endforeach; ?>
             </select>
         </div>
     </div>
 
     <div class="form row">
         <div class="form-froup col-md-6">
-            <label for="example-date-input" >Datum:</label>        
-            <input class="form-control" type="date" id="example-date-input">            
-        </div>
-        <div class="form-group col-md-6">
-            <label for="example-time-input" >Vrijeme:</label>  
-            <input class="form-control" type="time" id="example-time-input">
+            <label for="example-date-input" >Termin:</label>        
+            <input class="form-control" type="datetime-local" id="example-date-input" name="datum">            
         </div>
     </div>
     

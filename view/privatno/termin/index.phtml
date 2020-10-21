@@ -3,13 +3,18 @@
     <tr>
       <th scope="col">Popis termina</th>
     </tr>
+    <tr>
+      <th scope="col">Pacijent:</th>
+      <th scope="col">Doktor:</th>
+      <th scope="col">Termin:</th>
+    </tr>
   </thead>
   <tbody>
-    <?php foreach($termini as $termin): ?>
+    <?php foreach($entiteti as $entitet): ?>
       <tr>
-        <td><?=$termin->pacijent?></td>
-        <td><?=$termin->doktor?></td>
-        <td><?=$termin->pregled?></td>
+        <td><?=$entitet->pacijent?></td>
+        <td><?=$entitet->doktor?></td>
+        <td><?=$entitet->pregled?></td>
         <?php if($_SESSION['autoriziran']->uloga==='doktor'): ?>
           <td>
             <a href="<?=APP::config('url') ?>termin/promjena?sifra=<?=$termin->sifra?>">                
